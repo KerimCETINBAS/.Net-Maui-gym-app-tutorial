@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Vm="clr-namespace:GYM_APP.ViewModel"
+             x:Class="GYM_APP.View.LoginPage"
+             x:DataType="Vm:LoginViewModel"
+             BackgroundColor="{StaticResource Primary}"
+             Title="LoginPage">
+
+   <ContentPage.Resources>
+      
+
+
+        <Style x:Key="input" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="GhostWhite" />
+            <Setter Property="Margin" Value="10,20"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="CornerRadius" Value="1" />
+        </Style>
+
+        <Style x:Key="submit" TargetType="Button">
+            <Setter Property="Background" Value="GhostWhite" />
+            <Setter Property="TextColor" Value="#363636" />
+            <Setter Property="CornerRadius" Value="1"  />
+            <Setter Property="Margin" Value="10,20"/>
+        </Style>
+    </ContentPage.Resources>
+    <VerticalStackLayout>
+        <Label 
+            Text="Welcome to .NET MAUI!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Frame  Style="{StaticResource input}" >
+            <Entry Text="{Binding Username, Mode=OneWayToSource}" />
+        </Frame>
+
+        <Frame  Style="{StaticResource input}" >
+            <Entry IsPassword="True" Text="{Binding Password, Mode=OneWayToSource}" />
+        </Frame>
+        <Button  Text="Login" Command="{Binding LoginCommand}" Style="{StaticResource submit}" />
+    </VerticalStackLayout>
+</ContentPage>
