@@ -1,4 +1,7 @@
-﻿using GYM_APP.View;
+﻿using GYM_APP.Entities;
+using GYM_APP.Services;
+using GYM_APP.Store;
+using GYM_APP.View;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
@@ -16,19 +19,33 @@ namespace GYM_APP.ViewModel
         [ObservableProperty]
         private string username;
 
-        [ObservableProperty] 
+        [ObservableProperty]
         private string password;
+
+    
+        public TokenStore tokenStore;   
+        public LoginViewModel(TokenStore tokenStore)
+        {
+            this.tokenStore = tokenStore;   
+        }
 
         [ICommand]
         public async Task Login()
         {
 
-            if (Username != "admin") return;
-            if (Password != "1234") return;
+            LoginService loginService = new LoginService();
+            LoginData data = new();
+            data.email = Username;
+            data.password = Password;
+            string token = await LoginService.Login(data);
 
-            await Shell.Current.GoToAsync($"{nameof(LandingPage)}?role=admin");
-            var nav = Shell.Current.Navigation;
-            nav.RemovePage(nav.NavigationStack[0]);
+            if(token != null) {
+                this.tokenStore.Token = token;  
+                await Shell.Current.GoToAsync($"{nameof(LandingPage)}?role=admin");
+                var nav = Shell.Current.Navigation;
+                nav.RemovePage(nav.NavigationStack[0]);
+            }
+
         }
        
     }

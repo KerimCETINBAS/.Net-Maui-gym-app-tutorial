@@ -1,5 +1,7 @@
 ﻿using GYM_APP.ViewModel;
 using GYM_APP.View;
+using GYM_APP.Store;
+
 namespace GYM_APP;
 
 public static class MauiProgram
@@ -19,7 +21,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<MainViewModel>();
         builder.Services.AddTransient<LoginViewModel>();
         builder.Services.AddSingleton<NavigationViewModel>();
-	
+		builder.Services.AddSingleton<TokenStore>();
 			
 
 		return builder.Build();
