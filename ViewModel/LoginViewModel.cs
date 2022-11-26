@@ -26,8 +26,7 @@ namespace GYM_APP.ViewModel
             if (Username != "admin") return;
             if (Password != "1234") return;
 
-            await Shell.Current.GoToAsync(nameof(LandingPage));
-
+            await Shell.Current.GoToAsync($"{nameof(LandingPage)}?role=admin");
             var nav = Shell.Current.Navigation;
             nav.RemovePage(nav.NavigationStack[0]);
         }
